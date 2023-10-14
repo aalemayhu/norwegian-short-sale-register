@@ -1,0 +1,219 @@
+{
+  "x-generator": "NSwag v13.7.0.0 (NJsonSchema v10.1.24.0 (Newtonsoft.Json v12.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API for the Short Sale Register",
+    "description": "\r\nThis API delivers information about public shorting of instruments that have Finanstilsynet as relevant competent authority (RCA).\r\n\r\n## Notice about historical data\r\nWe only deliver information about shortings that were active within the past two years.\r\n",
+    "contact": {
+      "name": "API Support",
+      "url": "https://ssr.finanstilsynet.no",
+      "email": "ssr@finanstilsynet.no"
+    },
+    "version": "2.0.0",
+    "x-logo": {
+      "url": "/Content/Images/logo_api.svg",
+      "backgroundColor": "#FFFFFF",
+      "altText": "Finanstilsynet"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ssr.finanstilsynet.no"
+    }
+  ],
+  "paths": {
+    "/api/v2/instruments": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Get public shorting history",
+        "description": "\r\nReturns a list of all publically shorted instruments with their public shorting history.",
+        "operationId": "Instruments_GetPublicShortingHistory",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InstrumentShortingHistory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/instruments/export-json": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Download public shorting history as json",
+        "description": "\r\nReturns a json file which lists all publically shorted instruments with their public shorting history.\r\nThe format is the same as in [Get public shorting history](#operation/Instruments_GetPublicShortingHistory).\r\nThe only difference is that this endpoint sends headers that lets browsers treat it as a file download.",
+        "operationId": "Instruments_ExportPublicShortingHistoryJson",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InstrumentShortingHistory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/instruments/export-csv": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Download public shorting history as csv",
+        "description": "\r\nReturns a csv file which lists all publically shorted instruments with their public shorting history.\r\n\r\nThe file contains one row per instrument, per day there is a change in the public shorting of that instrument.\r\n\r\nEach row contains the isin, issuer name, date and aggregated (total) short percentage and number of shares for the instrument on the given day.\r\n\r\nBy default, the fields are separated by the `;` character, and encoded with locale `nb-NO`.\r\nThis can be changed using the `separator` and `locale` parameters.\r\n\r\nThe `locale` parameter only supports .NET Framework culture names as specified in the [.NET Framework documentation][dotnet-culture-names].\r\n\r\n[dotnet-culture-names]: https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo?view=netframework-4.7.2#culture-names-and-identifiers\r\n",
+        "operationId": "Instruments_ExportPublicShortingHistoryCsv",
+        "parameters": [
+          {
+            "name": "separator",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ";"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "nb-NO"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unsupported value in `locale` parameter",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InstrumentShortingHistory": {
+        "type": "object",
+        "description": "Describes the shorting history of an instrument.",
+        "additionalProperties": false,
+        "properties": {
+          "isin": {
+            "type": "string",
+            "description": "International Securities Identification Number for this instrument"
+          },
+          "issuerName": {
+            "type": "string",
+            "description": "The name of the instrument issuer"
+          },
+          "events": {
+            "type": "array",
+            "description": "List of short events for this instrument. Together they represent the shorting history of the instrument. See [AggregatedShortEvent](#section/AggregatedShortEvent)",
+            "items": {
+              "$ref": "#/components/schemas/AggregatedShortEvent"
+            }
+          }
+        }
+      },
+      "AggregatedShortEvent": {
+        "type": "object",
+        "description": "\r\nDescribes a short event. Such an event is triggered when there is a change in the public shorting of the instrument.\r\n\r\nExamples: a new position holder shorts this instrument, or an existing position holder updates its short on the instrument.",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "The date of the short event",
+            "format": "date"
+          },
+          "shortPercent": {
+            "type": "number",
+            "description": "Aggregated (total) short percentage",
+            "format": "float"
+          },
+          "shares": {
+            "type": "integer",
+            "description": "Aggregated (total) number of shorted shares",
+            "format": "int64"
+          },
+          "activePositions": {
+            "type": "array",
+            "description": "List of all the active public positions on the instrument at the given date. Together they make up this aggregated short event. See [UnderlyingShortPosition](#section/UnderlyingShortPosition)",
+            "items": {
+              "$ref": "#/components/schemas/UnderlyingShortPosition"
+            }
+          }
+        }
+      },
+      "UnderlyingShortPosition": {
+        "type": "object",
+        "description": "Describes an individual short position.",
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "The shorting date for this position",
+            "format": "date"
+          },
+          "shortPercent": {
+            "type": "number",
+            "description": "The percentage of the total shares of the instrument shorted in this position",
+            "format": "float"
+          },
+          "shares": {
+            "type": "integer",
+            "description": "The number of shares shorted in this position",
+            "format": "int64"
+          },
+          "positionHolder": {
+            "type": "string",
+            "description": "The holder of this short position"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Instruments"
+    },
+    {
+      "name": "Models",
+      "description": "\r\n## InstrumentShortingHistory\r\nDescribes the shorting history of an instrument.\r\n<SchemaDefinition schemaRef=\"#/components/schemas/InstrumentShortingHistory\" />\r\n\r\n\r\n\r\n## AggregatedShortEvent\r\n\r\nDescribes a short event. Such an event is triggered when there is a change in the public shorting of the instrument.\r\n\r\nExamples: a new position holder shorts this instrument, or an existing position holder updates its short on the instrument.\r\n<SchemaDefinition schemaRef=\"#/components/schemas/AggregatedShortEvent\" />\r\n\r\n\r\n\r\n## UnderlyingShortPosition\r\nDescribes an individual short position.\r\n<SchemaDefinition schemaRef=\"#/components/schemas/UnderlyingShortPosition\" />\r\n"
+    }
+  ]
+}

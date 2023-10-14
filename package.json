@@ -1,0 +1,16 @@
+{
+  "name": "norwegian-short-sale-register",
+  "version": "1.0.0",
+  "description": "client to access the short sale register in Norway",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "fetch:spec": "node scripts/fetchSpec.js"
+  },
+  "keywords": [],
+  "author": "Alexander Alemayhu",
+  "license": "MIT",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0"
+  }
+}
