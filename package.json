@@ -21,7 +21,7 @@
   "dependencies": {
     "rxjs": "^7.8.1"
   },
-  "files": [
-    "dist"
-  ]
+  "directories": {
+    "lib": "dist"
+  }
 }
