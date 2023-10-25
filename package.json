@@ -22,6 +22,6 @@
     "rxjs": "^7.8.1"
   },
   "directories": {
-    "lib": "dist"
+    "lib": "dist/*"
   }
 }
