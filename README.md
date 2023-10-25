@@ -39,8 +39,11 @@ try {
 } catch (error) {
   console.error(error);
 }
-/*
-Output:
+```
+
+#### CSV response
+
+```
 ISIN|Name|Date|ShortPercent|Shares
 BMG9156K1018|2020 BULKERS|16.10.2023|0,68|156475
 BMG9156K1018|2020 BULKERS|13.10.2023|0,7|159912
@@ -84,7 +87,11 @@ try {
 } catch (error) {
   console.error(error);
 }
-/* 
+```
+
+#### JSON Response
+
+```
 Output:
 [
   {
@@ -112,7 +119,6 @@ Output:
     ]
     // omitted
   },
-*/
 ```
 
 ## Troubleshooting?
