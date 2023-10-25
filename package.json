@@ -4,13 +4,19 @@
   "description": "client to access the short sale register in Norway",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
-    "fetch:spec": "node scripts/fetchSpec.js"
+    "fetch:spec": "node scripts/fetchSpec.js",
+    "build": "openapi-generator-cli generate -i config/openapi.json -g typescript-rxjs -o . ",
+    "test": "ts-node ./examples/*"
   },
   "keywords": [],
   "author": "Alexander Alemayhu",
   "license": "MIT",
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.7.0"
+    "@openapitools/openapi-generator-cli": "^2.7.0",
+    "ts-node": "^10.9.1",
+    "xhr2": "^0.2.1"
+  },
+  "dependencies": {
+    "rxjs": "^7.8.1"
   }
 }
