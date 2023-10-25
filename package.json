@@ -23,8 +23,5 @@
   },
   "directories": {
     "lib": "dist"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }
