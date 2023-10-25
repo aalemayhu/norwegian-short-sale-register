@@ -1,6 +1,6 @@
 {
   "name": "norwegian-short-sale-register",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "client to access the short sale register in Norway",
   "main": "dist/index.js",
   "scripts": {
