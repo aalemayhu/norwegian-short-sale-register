@@ -6,7 +6,8 @@
   "scripts": {
     "fetch:spec": "node scripts/fetchSpec.js",
     "generate:client": "openapi-generator-cli generate -i config/openapi.json -g typescript-rxjs -o . ",
-    "test": "ts-node ./examples/*"
+    "test": "ts-node ./examples/*",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Alexander Alemayhu",
