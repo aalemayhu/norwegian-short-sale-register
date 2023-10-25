@@ -11,3 +11,6 @@ runtime.ts
 scripts
 servers.ts
 tsconfig.json
+.github
+.openapi-generator
+.releaserc.json 
