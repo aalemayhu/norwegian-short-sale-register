@@ -3,6 +3,15 @@
 This is a RxJS TypeScript client to access the short sale register provided by the financial supervisory authority of Norway
 https://ssr.finanstilsynet.no/
 
+## Disclaimer
+
+This project is created using their publicly available API definitition and must not be mistaken for
+official support from them. This project is a hobby project to make convienient access this data
+programmatically. Use it at your own risk.
+
+https://ssr.finanstilsynet.no/api/v2/
+
+
 ## Installation
 
 ```
@@ -128,14 +137,6 @@ export const ensureXMLHttpRequestIsDefined = () => {
 ## Why create this?
 
 I want to learn RxJS for use in Angular web development. So I needed something I can play around with.
-
-## Disclaimer
-
-This project is created using their publicly available API definitition and must not be mistaken for
-official support from them. This project is a hobby project to make convienient access this data
-programmatically. Use it at your own risk.
-
-https://ssr.finanstilsynet.no/api/v2/
 
 ## License
 
