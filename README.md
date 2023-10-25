@@ -125,7 +125,7 @@ Output:
 
 If you are running in Node.js you might want to define `XMLHttpRequest`:
 
-```
+```typescript
 import * as xhr from 'xhr2';
 
 /**
