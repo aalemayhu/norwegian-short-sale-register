@@ -10,3 +10,7 @@ runtime.ts
 scripts
 servers.ts
 tsconfig.json
+.releaserc.json
+.openapi-generator-ignore
+.github
+.openapi-generator
