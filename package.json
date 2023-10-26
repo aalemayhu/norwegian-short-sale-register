@@ -2,12 +2,14 @@
   "name": "norwegian-short-sale-register",
   "version": "1.0.13",
   "description": "client to access the short sale register in Norway",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "fetch:spec": "node scripts/fetchSpec.js",
     "generate:client": "openapi-generator-cli generate -i config/openapi.json -g typescript-rxjs -o . ",
     "test": "ts-node ./examples/*",
-    "build": "tsc"
+    "build": "node_modules/.bin/tsc --outDir dist/",
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "Alexander Alemayhu",
