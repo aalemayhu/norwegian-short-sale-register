@@ -11,6 +11,13 @@ programmatically. Use it at your own risk.
 
 https://ssr.finanstilsynet.no/api/v2/
 
+
+## Installation
+
+```
+npm install norwegian-short-sale-register
+```
+
 ## Examples
 
 For a complete example look in the [./examples](./examples/) folder.
