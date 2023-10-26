@@ -1,7 +1,12 @@
-node_modules
+apis
+config
+examples
+index.ts
+models
 openapitools.json
 package-lock.json
+package.json
+runtime.ts
 scripts
-.github
-.openapi-generator
-.releaserc.json 
+servers.ts
+tsconfig.json
